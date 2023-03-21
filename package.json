@@ -1,0 +1,24 @@
+{
+  "name": "sbt-token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "hardhat": "^2.13.0"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-truffle5": "^2.0.7",
+    "@openzeppelin/contracts": "^4.4.0",
+    "@truffle/contract": "^4.6.18",
+    "csv": "^6.2.8",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "ethers": "^5.0.0"
+  }
+}
