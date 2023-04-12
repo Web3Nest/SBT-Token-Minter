@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-fs.createReadStream('C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets_with_addresses.csv')
+fs.createReadStream('C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets.csv')
   .pipe(csv())
   .on('data', (row) => {
     const name = row.name;

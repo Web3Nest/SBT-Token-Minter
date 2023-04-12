@@ -10,17 +10,23 @@
   "license": "ISC",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@truffle/hdwallet-provider": "^2.1.9",
+    "dotenv": "^16.0.3",
     "hardhat": "^2.13.0"
   },
   "dependencies": {
     "@nomiclabs/hardhat-truffle5": "^2.0.7",
+    "@nomiclabs/hardhat-waffle": "^2.0.5",
     "@openzeppelin/contracts": "^4.4.0",
     "@truffle/contract": "^4.6.18",
+    "canvas": "^2.11.0",
     "csv": "^6.2.8",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "ethers": "^5.0.0",
     "nodemailer": "^6.9.1",
-    "pdf-lib": "^1.17.1"
+    "papaparse": "^5.4.1",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.1"
   }
 }

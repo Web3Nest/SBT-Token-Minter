@@ -1,4 +1,4 @@
-name,enrollmentNo,organization,emailID
-Mayank,123,Acme,madhav04042001@gmail.com
-Abhishek,345,Suvidha,shabhishek055@gmail.com
-Aditya,678,GTL,mayank.sharma20010404@gmail.com
+eventId,name,enrollmentNo,campusID,emailID
+1,Mayank,123,456,madhav04042001@gmail.com
+2,Abhishek,789,342,asitmandal492@gmail.com
+3,Aditya,678,564,ecogenieweb3nest@gmail.com

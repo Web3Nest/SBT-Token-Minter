@@ -1,45 +1,59 @@
 const fs = require("fs");
-const parse = require("csv-parser");
+const Papa = require("papaparse");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 const { Wallet } = require("ethers");
 
+async function readCsv(filePath) {
+  return new Promise((resolve, reject) => {
+    const fileStream = fs.createReadStream(filePath);
+    const csvData = [];
+
+    Papa.parse(fileStream, {
+      header: true,
+      complete: (results) => {
+        resolve(results.data);
+      },
+      error: (error) => {
+        reject(error);
+      },
+    });
+  });
+}
+
 async function main() {
-  const csvData = [];
+  try {
+    const csvData = await readCsv("C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets.csv");
+    console.log("Parsed CSV data:", csvData);
 
-  fs.createReadStream("C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets.csv")
-    .pipe(parse({ headers: true }))
-    .on("data", (data) => csvData.push(data))
-    .on("end", () => {
-      console.log("Parsed CSV data:", csvData);
-
-      const updatedRecords = csvData.map((record) => {
+    const updatedRecords = csvData.map((record) => {
+      if (record.name && record.enrollmentNo && record.campusID && record.emailID) {
         const wallet = Wallet.createRandom();
         return {
           ...record,
           Address: wallet.address,
         };
-      });
+      }
+    }).filter(Boolean);
 
-      console.log("Updated records with addresses:", updatedRecords);
+    console.log("Updated records with addresses:", updatedRecords);
 
-      const csvWriter = createCsvWriter({
-        path: "C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets_with_addresses.csv",
-        header: [
-          { id: "name", title: "name" },
-          { id: "enrollmentNo", title: "enrollmentNo" },
-          { id: "organization", title: "organization" },
-          { id: "Address", title: "Address" },
-        ],
-      });
-
-      csvWriter
-        .writeRecords(updatedRecords)
-        .then(() => {
-          console.log("Output CSV file generated");
-        })
-        .catch((error) => console.error(error));
+    const csvWriter = createCsvWriter({
+      path: "C:/Users/Mayank Sharma/Desktop/SBT-Token/tickets_with_addresses.csv",
+      header: [
+        { id: "eventId", title: "eventId" },
+        { id: "name", title: "name" },
+        { id: "enrollmentNo", title: "enrollmentNo" },
+        { id: "campusID", title: "campusID" },
+        { id: "Address", title: "tokenaddress" },
+        { id: "emailID", title: "emailID" },
+      ],
     });
+
+    await csvWriter.writeRecords(updatedRecords);
+    console.log("Output CSV file generated");
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 main();
-  
